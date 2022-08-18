@@ -1,20 +1,35 @@
-//flag to keep refreshing once page has done it, maybe store it in local storage
-// localStorage.setItem('started', 'no');
-
-document.getElementById('refreshStart').addEventListener('click', refresh)
+//ISSUES: Chrome extension works but the refresh is happening to the pop up or my innner index.html not the actual web page I am on.
+document.getElementById('refreshStart').addEventListener('click', startRefresh)
 document.getElementById('refreshStop').addEventListener('click', stopRefresh)
 
-function refresh(){
-    localStorage.setItem('started', 'yes');
-    while(localStorage.getItem('started' === 'yes')){
+
+// async function getCurrentTab() {
+//     let queryOptions = { active: true, lastFocusedWindow: true };
+//     // `tab` will either be a `tabs.Tab` instance or `undefined`.
+//     let [tab] = await chrome.tabs.query(queryOptions);
+//     return tab;
+// }
+
+async function refresh(){
+    if(localStorage.getItem('started') === 'yes'){
         window.setTimeout( function() {
-            // window.location.reload();
             console.log('Page has been reloaded')
-          }, 10000);
+            // window.location.reload();
+            chrome.tabs.reload()
+        }, 10000);
     }
-    // console.log('Page has been reloaded')
+}
+
+refresh()
+
+function startRefresh(){
+    console.log('Click worked START')
+    localStorage.setItem('started', 'yes');
+    refresh()
+
 }
 
 function stopRefresh(){
+    console.log('Click worked STOP')
     localStorage.setItem('started', 'no');
 }

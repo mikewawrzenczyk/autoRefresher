@@ -1,0 +1,11 @@
+{
+    "name": "Page Auto Refresher",
+    "version": "1.0.0",
+    "description": "Auto Refresh any Website every 30 seconds",
+    "manifest_version": 3,
+    "author": "Mike Wawrzenczyk",
+    "action":{
+        "default_popup": "index.html",
+        "default_title": "Auto Refresher"
+    }
+}
